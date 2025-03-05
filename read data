@@ -1,0 +1,46 @@
+# Memuat data
+data <- read.csv("D:/Semester 5/datmin/student perfomance portugal.csv", sep = ";", header = TRUE)
+
+# Data Penjelasan Variabel
+variable_info <- data.frame(
+  Column = c("school", "sex", "age", "address", "famsize", "Pstatus", "Medu", "Fedu", 
+             "Mjob", "Fjob", "reason", "guardian", "traveltime", "studytime", "failures", 
+             "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", 
+             "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", 
+             "absences", "G1", "G2", "G3"),
+  Description = c(
+    "Student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)",
+    "Student's gender (binary: 'F' - female or 'M' - male)",
+    "Student's age (numeric: from 15 to 22)",
+    "Student's home address type (binary: 'U' - urban or 'R' - rural)",
+    "Family size (binary: 'LE3' - less or equal to 3 or 'GT3' - greater than 3)",
+    "Parent's cohabitation status (binary: 'T' - living together or 'A' - apart)",
+    "Mother's education (numeric: 0 - none, 1 - primary education (4th grade), etc.)",
+    "Father's education (numeric: same as mother's education)",
+    "Mother's job (nominal: 'teacher', 'health', 'services', etc.)",
+    "Father's job (nominal: same as mother's job)",
+    "Reason to choose this school (nominal: 'home', 'reputation', etc.)",
+    "Student's guardian (nominal: 'mother', 'father' or 'other')",
+    "Home to school travel time (numeric: 1 - <15 min, 2 - 15 to 30 min, etc.)",
+    "Weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, etc.)",
+    "Number of past class failures (numeric: n if 1<=n<3, else 4)",
+    "Extra educational support (binary: yes or no)",
+    "Family educational support (binary: yes or no)",
+    "Extra paid classes within the course subject (binary: yes or no)",
+    "Extra-curricular activities (binary: yes or no)",
+    "Attended nursery school (binary: yes or no)",
+    "Wants to take higher education (binary: yes or no)",
+    "Internet access at home (binary: yes or no)",
+    "With a romantic relationship (binary: yes or no)",
+    "Quality of family relationships (numeric: from 1 - very bad to 5 - excellent)",
+    "Free time after school (numeric: from 1 - very low to 5 - very high)",
+    "Going out with friends (numeric: from 1 - very low to 5 - very high)",
+    "Workday alcohol consumption (numeric: from 1 - very low to 5 - very high)",
+    "Weekend alcohol consumption (numeric: same as workday alcohol consumption)",
+    "Current health status (numeric: from 1 - very bad to 5 - very good)",
+    "Number of school absences (numeric: from 0 to 93)",
+    "First period grade (numeric: from 0 to 20)",
+    "Second period grade (numeric: same as first period grade)",
+    "Final grade (numeric: same as first and second period grades)"
+  )
+)
