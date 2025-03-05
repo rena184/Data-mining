@@ -1,0 +1,464 @@
+# UI
+ui <- dashboardPage(
+  # Header
+  dashboardHeader(
+    title = tags$div(
+      style = "display: flex; justify-content: space-between; align-items: center; width: 100%; height: 40px;",
+      
+      # Logo Kementerian Pendidikan dan Kebudayaan
+      tags$img(
+        src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg/1024px-Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg.png", 
+        height = '40px', width = 'auto', 
+        style = "vertical-align: middle; margin-right: 5px;"
+      ),
+      
+      # Logo ITS
+      tags$img(
+        src = "https://www.its.ac.id/wp-content/uploads/2020/07/Logo-ITS-1-355x219.png", 
+        height = '40px', width = 'auto', 
+        style = "vertical-align: middle; margin-left: 5px;"
+      ),
+      
+      # Teks tengah dengan styling yang sesuai
+      tags$div(
+        style = "font-family: Arial, sans-serif; font-weight: bold; font-size: 16px; text-align: center; flex-grow: 1; display: flex; align-items: center; justify-content: center;",
+        HTML("STUDENT PERFORMANCE IN PORTUGAL USING DATA MINING VISUALIZATION")
+      )
+    ),
+    titleWidth = 1210
+  ),
+  
+  # Sidebar
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Home", tabName = "home", icon = icon("home")),
+      menuItem("Deskripsi Data", tabName = "deskripsi", icon = icon("table")),
+      menuItem("Dataset", tabName = "about_dataset", icon = icon("info")),
+      menuItem("Visualisasi", tabName = "visualization", icon = icon("chart-bar")),
+      menuItem("Statistics", tabName = "statistics", icon = icon("calculator")),
+      menuItem("Pencarian Google", tabName = "google_search", icon = icon("search")),
+      menuItem("Penyusun", tabName = "Penyusun", icon = icon("users"))
+    )
+  ),
+  
+  # Body
+  dashboardBody(
+    tags$head(
+      tags$style(HTML('
+        .content-wrapper, .right-side { background-color: #E8EFCF; }
+        .skin-blue .main-header .logo { background-color: #4CAF50; }
+        .skin-blue .main-header .navbar { background-color: #FFEB3B; }
+        .skin-blue .main-sidebar { background-color: #F44336; }
+        .skin-blue .main-sidebar .sidebar .sidebar-menu a { color: white; }
+        .skin-blue .main-sidebar .sidebar .sidebar-menu a:hover { background-color: #D32F2F; }
+        .skin-blue .main-header .navbar .sidebar-toggle:hover { background-color: #4F6F52; }
+        .custom-box { background-color: #BED7DC !important; }
+        .header-box { background-color: #4F6F52 !important; color: white !important; margin: 0; padding: 0; }
+        .header-box h1 { margin: 0; padding: 20px; }
+        .main-header .sidebar-toggle { position: absolute; left: 10px !important; top: 5px !important; z-index: 1050; }
+      '))
+    ),
+    
+    tabItems(
+      # Tab Home
+      tabItem(
+        tabName = "home",
+        h2("Selamat Datang"),
+        p("App ini dibuat bertujuan untuk menganalisis dan memvisualisasikan data performa siswa di Portugal."),
+        
+        # Tambahkan Bootstrap 5 CDN ke dalam header
+        tags$head(
+          tags$link(rel = "stylesheet", href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"),
+          tags$script(src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
+        ),
+        
+        fluidRow(
+          box(
+            title = "Abstract and Figures",
+            status = "primary", solidHeader = TRUE,
+            width = 12,
+            # Penjelasan Abstract and Figures
+            tags$p(HTML("Students' academic performance has always been one of the most discussed topics worldwide. It is fundamental to a country's development. Therefore, our two goals for this projects are to study what the most significant factors are that impact student's grades, and to create a model that can predict new student's final grades for schools' use...")),
+            # Slider otomatis dengan 3 gambar
+            tags$div(
+              id = "carouselExampleAutoplaying",
+              class = "carousel slide",
+              `data-bs-ride` = "carousel",  # Menambahkan autoplay
+              tags$div(
+                class = "carousel-inner",
+                tags$div(
+                  class = "carousel-item active", 
+                  tags$img(
+                    src = "https://i.etsystatic.com/7715004/r/il/1c016f/6167956509/il_1588xN.6167956509_9nau.jpg", 
+                    class = "d-block w-100", alt = "Gambar 1"
+                  )
+                ),
+                tags$div(
+                  class = "carousel-item", 
+                  tags$img(
+                    src = "https://static01.nyt.com/images/2024/06/24/multimedia/24dc-graduates-callout-wjzk/24dc-graduates-callout-wjzk-articleLarge.jpg?quality=75&auto=webp&disable=upscale", 
+                    class = "d-block w-100", alt = "Gambar 2"
+                  )
+                ),
+                tags$div(
+                  class = "carousel-item", 
+                  tags$img(
+                    src = "https://i.ytimg.com/vi/moFz1gAPkKE/hqdefault.jpg", 
+                    class = "d-block w-100", alt = "Gambar 3"
+                  )
+                )
+              ),
+              tags$button(
+                class = "carousel-control-prev", type = "button", `data-bs-target` = "#carouselExampleAutoplaying", 
+                `data-bs-slide` = "prev",
+                tags$span(class = "carousel-control-prev-icon", `aria-hidden` = "true"),
+                tags$span(class = "visually-hidden", "Previous")
+              ),
+              tags$button(
+                class = "carousel-control-next", type = "button", `data-bs-target` = "#carouselExampleAutoplaying", 
+                `data-bs-slide` = "next",
+                tags$span(class = "carousel-control-next-icon", `aria-hidden` = "true"),
+                tags$span(class = "visually-hidden", "Next")
+              )
+            )
+          ),
+          
+          fluidRow(
+            box(
+              title = "Pengaruh Nilai Terhadap Penerimaan di Kampus",
+              width = 12, solidHeader = TRUE, status = "primary",
+              p("Tingkat nilai Akhir siswa sangat berpengaruh pada penerimaan mereka di kampus Grade A. Dalam konteks Portugal, siswa yang memperoleh nilai tinggi di ujian akhir cenderung lebih memiliki peluang diterima di perguruan tinggi. Untuk menghubungkan data ini, kita dapat melihat berbagai faktor yang mempengaruhi nilai akhir."),
+              fluidRow(
+                column(width = 6, tags$iframe(width = "100%", height = "300", src = "https://www.youtube.com/embed/Md1Ec8G5OiY", title = "Pengaruh Nilai pada Pendidikan Tinggi di Portugal")),
+                column(width = 6, tags$iframe(width = "100%", height = "300", src = "https://www.youtube.com/embed/5ayKsIsc05A", title = "Video Lain Tentang Pendidikan di Portugal"))
+              )
+            )
+          ),
+          
+          # Link to additional resources (without box)
+          tags$h3("Related Resources:"),
+          tags$p(tags$a(href = "https://www.statista.com/statistics/1484180/portugal-high-school-students-by-region/", target = "_blank", "Number of upper secondary education students in Portugal during the school year 2022/2023, by region (Statista)")),
+          tags$p(tags$a(href = "https://www.diva-portal.org/smash/get/diva2:1464106/FULLTEXT01.pdf", target = "_blank", "A statistical analysis of the performance in mathematics of secondary students in Portugal (DIVA Portal)")),
+          tags$p(tags$a(href = "https://gpseducation.oecd.org/CountryProfile?primaryCountry=PRT&treshold=10&topic=PI", target = "_blank", "Portugal Student Performance (PISA 2022)"))
+        )
+      ),
+      
+      # Tab Deskripsi Data
+      tabItem(
+        tabName = "deskripsi",
+        
+        # Judul Tab
+        h1("Deskripsi Dataset", style = "text-align: center;"),
+        
+        # Deskripsi Dataset
+        box(
+          title = "Dataset Information", status = "primary", solidHeader = TRUE, width = 12,
+          p("The Student Performance Dataset was collected from two Portuguese schools: Gabriel Pereira (GP) and Mousinho da Silveira (MS). 
+            The dataset contains student demographic, social, and academic information and their grades in three assessment periods."),
+          p("The main objectives of the dataset are:"),
+          tags$ul(
+            tags$li("To explore factors affecting students' academic performance."),
+            tags$li("To predict students' final grades for school use.")
+          )
+        ),
+        
+        # Informasi Variabel
+        box(
+          title = "Variable Information", status = "info", solidHeader = TRUE, width = 12,
+          DT::dataTableOutput("variable_table")
+        )
+      ),
+      
+      # Tab About Dataset
+      tabItem(
+        tabName = "about_dataset",
+        h2("Dataset"),
+        p("Dataset ini berisi informasi mengenai faktor-faktor yang mempengaruhi nilai siswa di sekolah menengah Portugal."),
+        DT::dataTableOutput("data_table")  # Output untuk DataTable
+      ),
+      
+      #tab item visualization
+      tabItem(
+        tabName = "visualization",
+        h2("Visualisasi Data"),
+        
+        # Box untuk Variabel Numerik dan Plot-nya
+        box(
+          title = "Pilih Variabel Numerik dan Plot",
+          width = 12, solidHeader = TRUE, status = "primary",
+          
+          # Dropdown untuk memilih variabel 
+          selectInput("plot_variable_numeric", "Pilih Variabel:", 
+                      choices = colnames(data)[sapply(data, is.numeric)], 
+                      selected = NULL),
+          
+          # Dropdown untuk memilih jenis plot
+          selectInput("plot_type_numeric", "Pilih Jenis Plot:",
+                      choices = c("scatter", "histogram", "boxplot", "density", "correlation_heatmap")),
+          
+          # Plot untuk variabel numerik
+          plotOutput("plot_numeric")
+        ),
+        
+        # Box untuk distribusi anak lulus dengan tidak lulus
+        box(
+          title = "Distribusi Anak Lulus dengan Tidak Lulus",
+          width = 12, solidHeader = TRUE, status = "primary",
+          
+          # Plot distribusi nilai G3 (lulus/tidak lulus)
+          plotOutput("distribution_graduation")
+        )
+      ),
+      
+      tabItem(tabName = "statistics",
+              h2("Statistics and Classification"),
+              
+              # Statistik Umum Dataset (Memilih variabel numerik atau kategorik)
+              box(
+                title = "Statistik Umum Dataset",
+                width = 12, solidHeader = TRUE, status = "primary",
+                
+                # Pilih Variabel Numerik
+                selectInput("numeric_var", "Pilih Variabel:", 
+                            choices = colnames(data)[sapply(data, is.numeric)], 
+                            selected = NULL),
+                # Tampilkan Statistik Berdasarkan Pilihan
+                verbatimTextOutput("summary_stats")
+              )
+      ),
+      
+      tabItem(
+        tabName = "google_search",
+        h2("Pencarian Google"),
+        textInput("search_query", "Masukkan kata kunci pencarian:"),
+        actionButton("search_button", "Cari di Google"),
+        uiOutput("search_result")  # Output hasil pencarian
+      ),
+      
+      tabItem(
+        tabName = "Penyusun",
+        div(h1(strong("Penyusun")), style = "text-align: center;"),
+        div(
+          style = "display: flex; justify-content: center;",
+          box(
+            width = 4,
+            status = NULL,
+            tags$img(
+              src = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvTweW_7y5w2dFpNWpRLi3eI1-X3ib_uA-C-JmaVPod-57BmF-NzQAMnjmlQ1a-TByNWINugE3npyjoOIeMzK3MWfJzF4JGzkX3CJBINgoqHEw9u6v_CoSL7JzlWRjTAAXGDjhdqFzj7tK2JONAt3u5XN6p4b3zzGVz3eeuhn6AG2YcfmENMT3GN-Wi_WT/s1544/foto%20non%20formal%202.jpg",
+              height = '150px', width = 'auto',
+              style = "margin: 0 auto; display: block;"
+            ),
+            div(strong("Amadea Inchrisa"), style = "text-align: center; font-size: 18px; margin-top: 10px;"),
+            div(strong("5003221146"), style = "text-align: center; font-size: 16px; margin-top: 5px;")
+          )
+        ),
+        box(
+          width = 12,
+          div(strong("Departemen Statistika"), style = "text-align: center;"),
+          div(strong("Fakultas Sains dan Analitika Data"), style = "text-align: center;"),
+          div(strong("Institut Teknologi Sepuluh Nopember Surabaya"), style = "text-align: center;"),
+          div(strong("2024"), style = "text-align: center;")
+        ),
+        # Menambahkan sosial media dan link di pojok kanan bawah
+        tags$div(
+          style = "position: fixed; bottom: 40px; right: 10px; display: flex; gap: 15px; align-items: center; justify-content: center;",
+          # Instagram
+          tags$a(
+            href = "https://www.instagram.com/amadeainchrisa/", target = "_blank",
+            tags$img(src = "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", 
+                     height = "40px", width = "40px", alt = "Instagram")
+          ),
+          # LinkedIn
+          tags$a(
+            href = "https://www.linkedin.com/in/amadea-inchrisa-580310260/", target = "_blank",
+            tags$img(src = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png", 
+                     height = "40px", width = "40px", alt = "LinkedIn")
+          ),
+          # Twitter
+          tags$a(
+            href = "https://x.com/amadeainchrisa", target = "_blank",
+            tags$img(src = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/X-Logo-Round-Color.png/640px-X-Logo-Round-Color.png", 
+                     height = "40px", width = "40px", alt = "Twitter")
+          ),
+          # YouTube
+          tags$a(
+            href = "https://www.youtube.com/@amadeainchrisa3743", target = "_blank",
+            tags$img(src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png", 
+                     height = "30px", width = "auto", alt = "YouTube")
+          )
+        ),
+        # Copyright di pojok kanan bawah
+        tags$div(
+          class = "copyright", style = "position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #777;",
+          "© 2024 Amadea Inchrisa. All rights reserved."
+        )
+      )
+    )  
+  )
+)
+
+server <- function(input, output, session) {
+  
+  # Mengubah tipe data setelah data dimuat
+  data$school <- as.factor(data$school)
+  data$sex <- as.factor(data$sex)
+  data$address <- as.factor(data$address)
+  data$famsize <- as.factor(data$famsize)
+  data$Pstatus <- as.factor(data$Pstatus)
+  data$Mjob <- as.factor(data$Mjob)
+  data$Fjob <- as.factor(data$Fjob)
+  data$reason <- as.factor(data$reason)
+  data$guardian <- as.factor(data$guardian)
+  data$schoolsup <- as.factor(data$schoolsup)
+  data$famsup <- as.factor(data$famsup)
+  data$paid <- as.factor(data$paid)
+  data$activities <- as.factor(data$activities)
+  data$nursery <- as.factor(data$nursery)
+  data$higher <- as.factor(data$higher)
+  data$internet <- as.factor(data$internet)
+  data$romantic <- as.factor(data$romantic)
+  
+  # Memastikan bahwa variabel numerik tetap bertipe numerik
+  data$age <- as.numeric(data$age)
+  data$Medu <- as.numeric(data$Medu)
+  data$Fedu <- as.numeric(data$Fedu)
+  data$traveltime <- as.numeric(data$traveltime)
+  data$studytime <- as.numeric(data$studytime)
+  data$failures <- as.numeric(data$failures)
+  data$famrel <- as.numeric(data$famrel)
+  data$freetime <- as.numeric(data$freetime)
+  data$goout <- as.numeric(data$goout)
+  data$Dalc <- as.numeric(data$Dalc)
+  data$Walc <- as.numeric(data$Walc)
+  data$health <- as.numeric(data$health)
+  data$absences <- as.numeric(data$absences)
+  data$G1 <- as.numeric(data$G1)
+  data$G2 <- as.numeric(data$G2)
+  data$G3 <- as.numeric(data$G3)
+  
+  # Tampilkan tabel data
+  output$data_table <- DT::renderDataTable({
+    DT::datatable(
+      data,
+      options = list(
+        scrollX = TRUE,
+        pageLength = 10,
+        dom = 'Bfrtip',
+        buttons = list(
+          list(extend = 'csv', text = 'Download CSV'),
+          list(extend = 'excel', text = 'Download Excel'),
+          list(extend = 'pdf', text = 'Download PDF', orientation = 'landscape'),
+          list(extend = 'print', text = 'Print')
+        )
+      ),
+      extensions = c('Buttons'),
+      rownames = FALSE
+    )
+  })
+  
+  # Statistik Deskriptif
+  output$summary_stats <- renderPrint({
+    req(input$numeric_var)  # Memastikan input ada
+    summary(data[[input$numeric_var]])  # Menghasilkan summary untuk variabel numerik
+  })
+  
+  # Plot Distribusi Nilai Akhir
+  output$distribution_plot <- renderPlot({
+    ggplot(data, aes(x = G3)) +
+      geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+      labs(title = "Distribusi Nilai Akhir (G3)", x = "Nilai Akhir", y = "Frekuensi") +
+      theme_minimal()
+  })
+  
+  # Hubungan Variabel terhadap Nilai Akhir (G3)
+  output$correlation_plot <- renderPlot({
+    req(input$correlation_variable)  # Memastikan input ada
+    ggplot(data, aes_string(x = input$correlation_variable, y = "G3")) +
+      geom_point() +
+      geom_smooth(method = "lm", color = "red", se = FALSE) +
+      labs(title = paste("Hubungan", input$correlation_variable, "dengan Nilai Akhir"), 
+           x = input$correlation_variable, y = "Nilai Akhir") +
+      theme_minimal()
+  })
+  
+  # Plot Berdasarkan Pilihan Pengguna untuk Variabel Numerik
+  output$plot_numeric <- renderPlot({
+    req(input$plot_variable_numeric, input$plot_type_numeric)  # Pastikan input terisi
+    plot_variable <- input$plot_variable_numeric
+    plot_type <- input$plot_type_numeric
+    
+    if (plot_type == "scatter") {
+      ggplot(data, aes_string(x = plot_variable, y = "G3")) +
+        geom_point() +
+        labs(title = paste("Scatter Plot of", plot_variable), x = plot_variable, y = "G3")
+    } else if (plot_type == "histogram") {
+      ggplot(data, aes_string(x = plot_variable)) +
+        geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+        labs(title = paste("Histogram of", plot_variable), x = plot_variable, y = "Frequency")
+    } else if (plot_type == "boxplot") {
+      ggplot(data, aes_string(x = "1", y = plot_variable)) +
+        geom_boxplot() +
+        labs(title = paste("Boxplot of", plot_variable), x = "", y = plot_variable)
+    } else if (plot_type == "density") {
+      ggplot(data, aes_string(x = plot_variable)) +
+        geom_density(fill = "skyblue", alpha = 0.5) +
+        labs(title = paste("Density Plot of", plot_variable), x = plot_variable, y = "Density")
+    } else if (plot_type == "correlation_heatmap") {
+      
+      # Menghitung korelasi antar variabel numerik
+      numeric_data <- data[, sapply(data, is.numeric)]
+      correlation_matrix <- cor(numeric_data, use = "complete.obs")
+      
+      # Menggunakan reshape2::melt untuk mengubah matriks korelasi
+      library(reshape2)
+      melted_correlation <- melt(correlation_matrix)
+      
+      # Menampilkan heatmap korelasi
+      ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
+        geom_tile() +
+        scale_fill_gradient2(low = "red", high = "green", mid = "yellow", midpoint = 0) +
+        theme_minimal() +
+        labs(title = "Heatmap Korelasi Antar Variabel Numerik", x = "Variabel", y = "Variabel") +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Menambahkan rotasi teks agar lebih terbaca
+    }
+  })
+  
+  # Plot Distribusi Anak Lulus dengan Tidak Lulus
+  output$distribution_graduation <- renderPlot({
+    data$graduation_status <- ifelse(data$G3 >= 10, "Lulus", "Tidak Lulus")
+    
+    ggplot(data, aes(x = graduation_status)) +
+      geom_bar(fill = c("skyblue", "salmon")) +
+      labs(title = "Distribusi Anak Lulus dan Tidak Lulus", x = "Status Lulus", y = "Frekuensi") +
+      theme_minimal() +
+      scale_x_discrete(labels = c("Tidak Lulus", "Lulus"))
+  })
+  
+  # Tampilkan statistik berdasarkan pilihan variabel
+  output$summary_stats <- renderPrint({
+    if (!is.null(input$numeric_var) && input$numeric_var != "") {
+      summary(data[[input$numeric_var]])  # Statistik untuk variabel numerik
+    } else if (!is.null(input$categorical_var) && input$categorical_var != "") {
+      summary(data[[input$categorical_var]])  # Statistik untuk variabel kategorik
+    }
+  })
+  
+  # Google Search - Pencarian di Google
+  observeEvent(input$search_button, {
+    query <- input$search_query
+    # Membuka pencarian Google di tab baru dengan query yang dimasukkan
+    browseURL(paste("https://www.google.com/search?q=", query))
+  })
+  
+  # Menampilkan tabel informasi variabel
+  output$variable_table <- DT::renderDataTable({
+    DT::datatable(variable_info, 
+                  options = list(pageLength = 10, autoWidth = TRUE),
+                  rownames = FALSE)
+  })
+  
+}
+
+
+# Menjalankan aplikasi
+shinyApp(ui, server)
